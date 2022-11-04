@@ -10,6 +10,7 @@ import android.widget.EditText;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.OutputStream;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,11 +51,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private String getData(){
 
-        return null;
+        String data;
+        File path  = this.getFilesDir();
+        File file = new File(path, "dades.txt");
 
+        try{
+            Scanner scanner = new Scanner(file);
+            while(scanner.hasNext()){
+                //Leer lineas
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }
