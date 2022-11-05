@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,6 +16,7 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 
     private EditText inputText;
+    private TextView textView;
     private Button buttonSave;
 
     @Override
@@ -23,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         inputText = findViewById(R.id.editText);
+        textView = findViewById(R.id.textCarregat);
         buttonSave = findViewById(R.id.buttonSave);
+
+        textView.setText("Text: " + getData());
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,20 +58,22 @@ public class MainActivity extends AppCompatActivity {
 
     private String getData(){
 
-        String data;
+        String data = "";
         File path  = this.getFilesDir();
         File file = new File(path, "dades.txt");
 
-        try{
-            Scanner scanner = new Scanner(file);
-            while(scanner.hasNext()){
-                //Leer lineas
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        if(file.exists()){
+            try{
+                Scanner scanner = new Scanner(file);
+                while(scanner.hasNext()){
+                    data += scanner.nextLine();
+                }
 
-        return null;
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return data;
     }
 
 }
